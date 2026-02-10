@@ -26,11 +26,7 @@ public class TurretPID extends OpMode {
     Pose targetPose = new Pose(50, 50);
 
     Telemetry telemetry;
-
-    Goal.ALLIANCE alliance = Goal.ALLIANCE.BLUE;
-
-
-    Goal goal = new Goal(alliance);
+    Goal goal = new Goal(Goal.ALLIANCE.BLUE);
 
 
 
