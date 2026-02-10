@@ -1,155 +1,43 @@
 package org.firstinspires.ftc.teamcode.ShooterSystems;
 
-import org.apache.commons.math3.util.FastMath;
-import org.firstinspires.ftc.teamcode.TeleOp.CurrentAlliance;
-import org.firstinspires.ftc.teamcode.util.MathUtil;
+import java.util.HashMap;
 
 public class Goal {
 
-    public static class GoalCoordinate {
 
-        private final double x;
-        private final double y;
-
-        public GoalCoordinate(double x, double y) {
-
-            this.x = x;
-            this.y = y;
-        }
-
-        public double getX() { return x; }
-        public double getY() { return y; }
+    public enum ALLIANCE {
+        BLUE,
+        RED
     }
 
-    /**
-     * x is forward-backward with forward being positive and backward being negative
-     * <p>
-     * y is left-right with left being positive and right being negative
-     * **/
-    @SuppressWarnings("all")
-    public enum GoalCoordinates {
+    HashMap<String, Integer> BlueCoords = new HashMap<>();
 
-        //           CLOSE ALLIANCE                  CLOSE OPPONENT                           FAR
-        RED(new GoalCoordinate(69,-78), new GoalCoordinate(40,-72), new GoalCoordinate(68,-72)),
-        BLUE(new GoalCoordinate(74, 72), new GoalCoordinate(54, 72), new GoalCoordinate(74, 73));
-
-        private GoalCoordinate closeAlliance;
-        private GoalCoordinate closeOpponent;
-        private GoalCoordinate far;
-
-        GoalCoordinates(GoalCoordinate closeAlliance, GoalCoordinate closeOpponent, GoalCoordinate far) {
-
-            this.closeAlliance = closeAlliance;
-            this.closeOpponent = closeOpponent;
-            this.far = far;
-        }
-
-        /// Sets the current the close and far {@link GoalCoordinate}
-        public void setGoalCoordinates(GoalCoordinate closeAlliance, GoalCoordinate closeOpponent, GoalCoordinate far) {
-
-            this.closeAlliance = closeAlliance;
-            this.closeOpponent = closeOpponent;
-            this.far = far;
-        }
-
-        public GoalCoordinate getCloseAllianceCoordinate() {
-            return closeAlliance;
-        }
-        public GoalCoordinate getCloseOpponentCoordinate() {
-            return closeOpponent;
-        }
-
-        public GoalCoordinate getCloseCoordinate(double y, GoalCoordinates allianceUsingGoalCoordinates) {
-
-            boolean isOpponent = allianceUsingGoalCoordinates == BLUE ? y < RED_CLOSE_GOAL_COORDINATE_SWITCH : y > BLUE_CLOSE_GOAL_COORDINATE_SWITCH;
-
-            return isOpponent ? closeOpponent : closeAlliance;
-        }
-
-        public GoalCoordinate getCloseCoordinate(double y, CurrentAlliance.ALLIANCE alliance) {
-
-            boolean isOpponent = alliance == CurrentAlliance.ALLIANCE.BLUE_ALLIANCE ? y < RED_CLOSE_GOAL_COORDINATE_SWITCH : y > BLUE_CLOSE_GOAL_COORDINATE_SWITCH;
-
-            return isOpponent ? closeOpponent : closeAlliance;
-        }
-
-        public GoalCoordinate getFarCoordinate() {
-            return far;
-        }
-
-        // (lateral) y value after which (once y is greater) close goal coordinate switches from alliance to opponent
-        public static double RED_CLOSE_GOAL_COORDINATE_SWITCH = -10;
-        public static double BLUE_CLOSE_GOAL_COORDINATE_SWITCH = 10;
-
-        public void setRedCloseGoalCoordinateSwitch(double redCloseGoalCoordinateSwitch) {
-            RED_CLOSE_GOAL_COORDINATE_SWITCH = redCloseGoalCoordinateSwitch;
-        }
-
-        public void setBlueCloseGoalCoordinateSwitch(double blueCloseGoalCoordinateSwitch) {
-            BLUE_CLOSE_GOAL_COORDINATE_SWITCH = blueCloseGoalCoordinateSwitch;
-        }
-
-        public static boolean onAllianceSide(double y, CurrentAlliance.ALLIANCE alliance) {
-
-            boolean isAlliance = alliance == CurrentAlliance.ALLIANCE.BLUE_ALLIANCE ? y > RED_CLOSE_GOAL_COORDINATE_SWITCH : y < BLUE_CLOSE_GOAL_COORDINATE_SWITCH;
-
-            return isAlliance;
-        }
-
-        public boolean onAllianceSide(double y) {
-
-            boolean isAlliance = this == BLUE ? y < RED_CLOSE_GOAL_COORDINATE_SWITCH : y > BLUE_CLOSE_GOAL_COORDINATE_SWITCH;
-
-            return isAlliance;
-        }
-
-        public static boolean onOpponentSide(double y, CurrentAlliance.ALLIANCE alliance) {
-
-            boolean isOpponent = alliance == CurrentAlliance.ALLIANCE.BLUE_ALLIANCE ? y < RED_CLOSE_GOAL_COORDINATE_SWITCH : y > BLUE_CLOSE_GOAL_COORDINATE_SWITCH;
-
-            return isOpponent;
-        }
-
-        public boolean onOpponentSide(double y) {
-
-            boolean isOpponent = this == BLUE ? y < RED_CLOSE_GOAL_COORDINATE_SWITCH : y > BLUE_CLOSE_GOAL_COORDINATE_SWITCH;
-
-            return isOpponent;
-        }
+    {
+        BlueCoords.put("x", 50);
+        BlueCoords.put("y", 50);
     }
 
-    public enum GoalCoordinatesForDistance {
+    HashMap<String, Integer> RedCoords = new HashMap<>();
 
-        RED(new GoalCoordinate(60, -60)),
-        BLUE(new GoalCoordinate(60, 60));
+    {
+        RedCoords.put("x", 50);
+        RedCoords.put("y", -50);
+    }
 
-        private GoalCoordinate coord;
+    public ALLIANCE alliance;
 
-        GoalCoordinatesForDistance(GoalCoordinate coord) {
-            this.coord = coord;
+    public double x;
+    public double y;
+
+    public Goal(ALLIANCE alliance) {
+
+        if (alliance == ALLIANCE.BLUE) {
+                this.x = BlueCoords.get("x");
+                this.y = BlueCoords.get("y");
         }
-
-        public GoalCoordinate getCoordinate() {
-            return coord;
+        else if (alliance == ALLIANCE.RED) {
+            this.x = RedCoords.get("x");
+            this.y = RedCoords.get("Y");
         }
     }
-
-    /// The angle in degrees that is required for any system to look in to be pointing at the goal.
-    /// <p>
-    /// x is forward-backward and y is left-right.
-    /// @param x In inches
-    /// @param y In inches
-    public static double getAngleToGoal(double x, double y, GoalCoordinate goalCoordinate) {
-
-        double dx = goalCoordinate.getX() - x;
-        double dy = goalCoordinate.getY() - y;
-
-        return Math.toDegrees(FastMath.atan2(dy, dx));
-    }
-
-    /// Gets the flat (2d) distance from the goal.
-    public static double getDistanceFromGoal(double x, double y, GoalCoordinate goalCoordinate) {
-        return MathUtil.getDistance2d(x, goalCoordinate.getX(), y, goalCoordinate.getY());
-    }
-
 }

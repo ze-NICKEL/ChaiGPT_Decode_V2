@@ -1,44 +1,26 @@
 package org.firstinspires.ftc.teamcode.ShooterSystems;
 
-import com.chaigptrobotics.shenanigans.Peak;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Peak
-/// Uses AXONs
+import org.firstinspires.ftc.teamcode.Util.Constants.HoodConstants;
+
 public class HoodAngler {
+    Servo HoodAngler;
 
-    private Servo leftHoodAngler;
-    private Servo rightHoodAngler;
-
-    public HoodAngler(HardwareMap hardwareMap, String leftHoodAnglerServoName, String rightHoodAnglerServoName) {
-
-        leftHoodAngler = hardwareMap.get(Servo.class, leftHoodAnglerServoName);
-        rightHoodAngler = hardwareMap.get(Servo.class, rightHoodAnglerServoName);
+    public HoodAngler(HardwareMap hardwareMap) {
+        this.HoodAngler = hardwareMap.get(Servo.class, HoodConstants.HoodAnglerName);
     }
 
-    /// The first item is for the left angler servo and the seconds item is for the right angler servo
-    public void setServoDirections(Servo.Direction[] directions) {
-
-        leftHoodAngler.setDirection(directions[0]); //1st item
-        rightHoodAngler.setDirection(directions[1]); //2nd item
-    }
-
-    public Servo.Direction[] getServoDirections() {
-
-        return new Servo.Direction[] {
-                leftHoodAngler.getDirection(), //1st item
-                rightHoodAngler.getDirection() //2nd item
-        };
-    }
-
+    /**
+     *
+     * @param position 0.11 is fully in, 0.9 is fully out
+     */
     public void setPosition(double position) {
-
-        leftHoodAngler.setPosition(position);
-        rightHoodAngler.setPosition(position);
+        HoodAngler.setPosition(position);
     }
 
-    public double getPosition() {
-        return leftHoodAngler.getPosition();
+    public void reset() {
+        HoodAngler.setPosition(0.11);
     }
 }
