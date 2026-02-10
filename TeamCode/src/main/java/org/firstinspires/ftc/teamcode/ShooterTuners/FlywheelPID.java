@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ShooterSystems.ShooterTuners;
+package org.firstinspires.ftc.teamcode.ShooterTuners;
 
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ShooterSystems.ShooterTuners;
+package org.firstinspires.ftc.teamcode.ShooterTuners;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -11,13 +11,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.ShooterSystems.Goal;
 import org.firstinspires.ftc.teamcode.ShooterSystems.Turret;
 
-
-@TeleOp(name="TURRET PID", group="tuners")
 @Config
+@TeleOp(name="TURRET PID", group="tuners")
+
 public class TurretPID extends OpMode {
 
 
-    double kp, ki, kd;
+    public static double kp,ki,kd;
 
     Turret turret;
 
@@ -56,6 +56,8 @@ public class TurretPID extends OpMode {
 
         telemetry.addData("TargetX: ", turret.targetX);
         telemetry.addData("targetY: ", turret.targetY);
+
+        telemetry.update();
 
 
 
