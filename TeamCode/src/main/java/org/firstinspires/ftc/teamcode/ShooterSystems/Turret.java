@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.CRServoImplEx;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.apache.commons.math3.util.FastMath;
 import org.firstinspires.ftc.teamcode.Util.Constants;
@@ -49,7 +50,7 @@ public class Turret {
 
     double currError = 0, prevError = 0;
 
-    double p=0, i=0,  d=0, f=0;
+    double p=0, i=0,  d=0;
 
 
 
@@ -114,13 +115,20 @@ public class Turret {
 
     }
 
-    double power = 0;
+    double prevTime=0, currTime=0;
+
+    ElapsedTime timer = new ElapsedTime();
 
     public void updatePID() {
         prevError = currError;
         currError = turretTurnTicks - currTurretPosTicks;
 
         errorSum = prevError + currError;
+        prevTime = currTime;
+        currTime = timer.milliseconds();
+
+        dT = currTime - prevTime;
+
 
 
         p = kp * currError;
@@ -134,6 +142,8 @@ public class Turret {
     }
 
     public void update() {
+
+        follower.update();
 
         currTurretPosTicks = motor.getCurrentPosition();
         currentPose = follower.getPose();
