@@ -14,6 +14,8 @@ import org.firstinspires.ftc.teamcode.ShooterSystems.ExtremeNikhilFlywheel;
 public class FlywheelPID extends OpMode {
     ExtremeNikhilFlywheel flywheel;
 
+    static double kp=0,ki=0,kd=0;
+
 
     Pose initialPose = new Pose(0,0,Math.toRadians(270));
 
@@ -27,6 +29,8 @@ public class FlywheelPID extends OpMode {
 
     @Override
     public void loop() {
+
+        flywheel.setPIDCoefficients(kp,ki,kd);
 
         flywheel.update();
 
