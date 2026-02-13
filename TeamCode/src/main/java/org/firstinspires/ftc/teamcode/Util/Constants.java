@@ -62,6 +62,12 @@ public class Constants {
         //TODO: could add regression
     }
 
+    /// CORE TESTER CONSTANTS: EXPERIMENTAL: BEWARE  ⚠ ⚠ ⚠ ⚠
+
+    public static class CoreTesterConstants {
+        public static String LimelightCameraName = "Limelight3A";
+    }
+
 
 
 
