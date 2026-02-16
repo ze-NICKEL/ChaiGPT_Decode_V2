@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Util.Constants;
 import org.firstinspires.ftc.teamcode.Util.Constants.ShooterConstants;
 import org.firstinspires.ftc.teamcode.Util.NikhilFunctions;
 import org.firstinspires.ftc.teamcode.pedroPathing.PPConstants;
+import org.opencv.core.Mat;
 
 public class Turret {
 
@@ -24,7 +25,6 @@ public class Turret {
     CRServoImplEx left_turret;
 
     CRServoImplEx right_turret;
-
 
 
     //Pose initialPose = new Pose(0,0,0);
@@ -50,14 +50,13 @@ public class Turret {
 
     double currError = 0, prevError = 0;
 
-    double p=0, i=0,  d=0;
-
+    double p = 0, i = 0, d = 0;
 
 
     double currTurretPosTicks = 0;
 
     double errorSum = 0;
-    Pose currentPose = new Pose(0,0,0);
+    Pose currentPose = new Pose(0, 0, 0);
 
     double dT = 0;
 
@@ -78,19 +77,17 @@ public class Turret {
      */
 
 
-
-    public Turret(HardwareMap hardwareMap, Pose initialPose, Goal goal){
+    public Turret(HardwareMap hardwareMap, Pose initialPose, Goal goal) {
 
         left_turret = hardwareMap.get(CRServoImplEx.class, ShooterConstants.ConfigNames.left_turret_Config_name);
         right_turret = hardwareMap.get(CRServoImplEx.class, ShooterConstants.ConfigNames.right_turret_Config_name);
         this.targetX = goal.x;
         this.targetY = goal.y;
 
-       follower = PPConstants.createTeleOpFollower(hardwareMap);
+        follower = PPConstants.createTeleOpFollower(hardwareMap);
 
 
-
-       follower.setStartingPose(initialPose);
+        follower.setStartingPose(initialPose);
 
 
         follower.update();
@@ -107,7 +104,7 @@ public class Turret {
 
     }
 
-    double turretTurnTicks = 0;
+    public double turretTurnTicks = 0;
 
     public void setPosition(double endPos) {
 
@@ -115,7 +112,7 @@ public class Turret {
 
     }
 
-    double prevTime=0, currTime=0;
+    double prevTime = 0, currTime = 0;
 
     ElapsedTime timer = new ElapsedTime();
 
@@ -130,18 +127,37 @@ public class Turret {
         dT = currTime - prevTime;
 
 
-
         p = kp * currError;
         i = ki * errorSum;
-        d = kd* (prevError - currError) / dT;
+        d = kd * (prevError - currError) / dT;
 
-        left_turret.setPower(customFunctions.clamp(p+i+d));
-        right_turret.setPower(customFunctions.clamp(p+i+d));
+        left_turret.setPower(customFunctions.clamp(p + i + d));
+        right_turret.setPower(customFunctions.clamp(p + i + d));
 
 
     }
 
     public void update() {
+        follower.update();
+
+        currTurretPosTicks = motor.getCurrentPosition();
+
+        currentPose = follower.getPose();
+
+        currentX = currentPose.getX();
+        currentY = currentPose.getY();
+
+        follower.update();
+
+        deltaX = targetX - currentX;
+        deltaY = targetY - currentY;
+
+        setPosition(73.5179487179 * (90 - Math.toDegrees(currentPose.getHeading())));
+
+        updatePID();
+    }
+
+    /*public void update() {
 
         follower.update();
 
@@ -151,16 +167,18 @@ public class Turret {
         currentX = currentPose.getX();
         currentY = currentPose.getY();
 
+        follower.update();
 
         deltaX = targetX - currentX;
         deltaY = targetY - currentY;
 
-        fieldAngle = FastMath.atan2(deltaY, deltaX);
-        robotHeading = currentPose.getHeading();
-        pointC = 180 - robotHeading + fieldAngle;
+    fieldAngle = FastMath.toDegrees(FastMath.atan2(deltaY, deltaX));
+        robotHeading = FastMath.toDegrees(currentPose.getHeading());
+        pointC = 180 - (robotHeading + fieldAngle);
 
-        setPosition(pointC + fieldAngle);
+        setPosition(0.0020446994 * pointC + fieldAngle);
         updatePID();
+        follower.update();
 
-    }
+    }*/
 }

@@ -53,6 +53,8 @@ public class TurretPID extends OpMode {
         telemetry.addData("TargetX: ", turret.targetX);
         telemetry.addData("targetY: ", turret.targetY);
 
+        telemetry.addData("turret turn: ", turret.turretTurnTicks);
+
         telemetry.update();
 
 
