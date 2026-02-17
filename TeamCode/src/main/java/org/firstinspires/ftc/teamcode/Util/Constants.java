@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Util;
 
+import java.util.HashMap;
+
 public class Constants {
 
 
@@ -66,6 +68,20 @@ public class Constants {
 
     public static class CoreTesterConstants {
         public static String LimelightCameraName = "Limelight3A";
+
+
+        public static HashMap<String, Integer> blueDriveCoords = new HashMap<>();
+        {
+            blueDriveCoords.put("x", -48);
+            blueDriveCoords.put("y",24);
+        }
+
+        public static HashMap<String, Integer> redDriveCoords = new HashMap<>();
+        {
+            redDriveCoords.put("x", -48);
+
+            redDriveCoords.put("y", -24);
+        }
     }
 
 

@@ -10,14 +10,14 @@ public class Goal {
         RED
     }
 
-    HashMap<String, Integer> BlueCoords = new HashMap<>();
+    static HashMap<String, Integer> BlueCoords = new HashMap<>();
 
     {
         BlueCoords.put("x", 50);
         BlueCoords.put("y", 50);
     }
 
-    HashMap<String, Integer> RedCoords = new HashMap<>();
+    static HashMap<String, Integer> RedCoords = new HashMap<>();
 
     {
         RedCoords.put("x", 50);

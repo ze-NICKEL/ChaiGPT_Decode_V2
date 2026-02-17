@@ -26,14 +26,14 @@ public class Limelight {
 
     public Limelight(@NonNull HardwareMap hardwareMap) {
         this.limelight3A = hardwareMap.get(Limelight3A.class, Constants.CoreTesterConstants.LimelightCameraName);
-        Follower follower = PPConstants.createAutoFollower(hardwareMap);
-
 
     }
+
+
 
     public void updateLimelightResults() {
         result = limelight3A.getLatestResult();
 
-
+        //currentPose = result.getBotPose();
     }
 }
