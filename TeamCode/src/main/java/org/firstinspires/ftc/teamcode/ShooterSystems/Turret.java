@@ -19,7 +19,7 @@ import org.opencv.core.Mat;
 public class Turret {
 
 
-    Gamepad gamepad = new Gamepad();
+    Gamepad gamepad;
 
 
     CRServoImplEx left_turret;
@@ -77,13 +77,15 @@ public class Turret {
      */
 
 
-    public Turret(HardwareMap hardwareMap, Pose initialPose, Goal goal) {
+    public Turret(HardwareMap hardwareMap, Gamepad gamepad1, Pose initialPose, Goal goal) {
 
         left_turret = hardwareMap.get(CRServoImplEx.class, ShooterConstants.ConfigNames.left_turret_Config_name);
         right_turret = hardwareMap.get(CRServoImplEx.class, ShooterConstants.ConfigNames.right_turret_Config_name);
         this.targetX = goal.x;
         this.targetY = goal.y;
 
+
+        this.gamepad = gamepad1;
         follower = PPConstants.createTeleOpFollower(hardwareMap);
 
 

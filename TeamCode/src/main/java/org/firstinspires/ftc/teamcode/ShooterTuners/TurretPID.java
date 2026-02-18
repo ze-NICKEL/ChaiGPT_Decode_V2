@@ -34,7 +34,7 @@ public class TurretPID extends OpMode {
     @Override
     public void init() {
 
-        turret = new Turret(hardwareMap, initialPose,goal );
+        turret = new Turret(hardwareMap, gamepad1, initialPose,goal );
 
         telemetry = new MultipleTelemetry(super.telemetry, FtcDashboard.getInstance().getTelemetry());
 

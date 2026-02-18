@@ -29,13 +29,13 @@ public class BLUE_TELEOP extends OpMode {
     @Override
     public void init() {
 
-        flywheel = new ExtremeNikhilFlywheel(hardwareMap, initialPose);
+        flywheel = new ExtremeNikhilFlywheel(hardwareMap, initialPose, gamepad1);
 
-        transfer = new Transfer(hardwareMap, initialPose);
+        transfer = new Transfer(hardwareMap, gamepad1, initialPose);
 
-        intake = new Intake(hardwareMap);
+        intake = new Intake(hardwareMap, gamepad1, gamepad2);
 
-        turret = new Turret(hardwareMap, initialPose, blueGoal);
+        turret = new Turret(hardwareMap, gamepad1, initialPose, blueGoal);
 
 
 

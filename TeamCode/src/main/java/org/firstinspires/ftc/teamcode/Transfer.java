@@ -20,7 +20,7 @@ public class Transfer {
 
     DcMotorEx transfer;
 
-    Gamepad gamepad = new Gamepad();
+    Gamepad gamepad1;
 
     double transferTargetVelocity = 0;
 
@@ -33,10 +33,10 @@ public class Transfer {
     ExtremeNikhilFlywheel flywheel;
 
     Pose initialPose;
-    public Transfer(@NonNull HardwareMap hardwareMap, Pose initialPose) {
+    public Transfer(@NonNull HardwareMap hardwareMap, Gamepad gamepad1, Pose initialPose) {
         this.transfer = hardwareMap.get(DcMotorEx.class, TransferConstants.transfer_name);
 
-        flywheel = new ExtremeNikhilFlywheel(hardwareMap, initialPose);
+        flywheel = new ExtremeNikhilFlywheel(hardwareMap, initialPose, gamepad1);
 
     }
 
@@ -82,13 +82,16 @@ public class Transfer {
     }
 
     public void singleTransfer() {
-
         new WaitUntil(() -> flywheel.isAtTargetVelocity());
         transfer.setVelocity(TransferConstants.transfer_velocity);
     }
 
+    public void forceTransfer() {
+        transfer.setVelocity(TransferConstants.transfer_velocity);
+    }
+
     public void update() {
-        if (gamepad.right_bumper) {
+        if (gamepad1.right_bumper) {
 
             //transferTargetVelocity = TransferConstants.transfer_velocity;
 

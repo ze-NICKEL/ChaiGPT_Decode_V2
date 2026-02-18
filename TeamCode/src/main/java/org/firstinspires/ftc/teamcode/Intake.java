@@ -11,9 +11,9 @@ public class Intake {
 
     DcMotorEx intake;
     
-    Gamepad gamepad1= new Gamepad();
+    Gamepad gamepad1;
 
-    Gamepad gamepad2 = new Gamepad();
+    Gamepad gamepad2;
 
     Servo PTOServo;
 
@@ -21,7 +21,10 @@ public class Intake {
 
 
 
-    public Intake(HardwareMap hardwareMap) {
+    public Intake(HardwareMap hardwareMap, Gamepad gamepad1, Gamepad gamepad2) {
+
+        this.gamepad1 = gamepad1;
+        this.gamepad2 = gamepad2;
 
         intake = hardwareMap.get(DcMotorEx.class, IntakeConstants.intake_motor);
 

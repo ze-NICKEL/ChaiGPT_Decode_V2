@@ -13,7 +13,6 @@ import org.firstinspires.ftc.teamcode.ShooterSystems.ExtremeNikhilFlywheel;
 @TeleOp(name = "FLYWHEEL PID TUNER", group = "tuning")
 public class FlywheelPID extends OpMode {
     ExtremeNikhilFlywheel flywheel;
-
     static double kp=0,ki=0,kd=0;
 
 
@@ -23,7 +22,7 @@ public class FlywheelPID extends OpMode {
     @Override
     public void init() {
 
-        flywheel = new ExtremeNikhilFlywheel(hardwareMap, initialPose);
+        flywheel = new ExtremeNikhilFlywheel(hardwareMap, initialPose, gamepad1);
 
     }
 

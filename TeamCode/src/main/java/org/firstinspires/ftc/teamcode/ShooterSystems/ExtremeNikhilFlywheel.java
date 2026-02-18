@@ -24,7 +24,7 @@ public class ExtremeNikhilFlywheel {
 
     Follower follower;
 
-    Gamepad gamepad = new Gamepad();
+    Gamepad gamepad;
 
     public double flywheel_current_velocity = 0;
 
@@ -35,7 +35,7 @@ public class ExtremeNikhilFlywheel {
     double currY = 0;
 
     ElapsedTime timer = new ElapsedTime();
-    public ExtremeNikhilFlywheel(@NonNull HardwareMap hardwareMap, Pose initialPose) {
+    public ExtremeNikhilFlywheel(@NonNull HardwareMap hardwareMap, Pose initialPose, Gamepad gamepad1) {
 
         left_flywheel = hardwareMap.get(DcMotorEx.class, MotorNames.left_flywheel);
 
