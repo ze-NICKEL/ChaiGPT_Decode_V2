@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Util;
 
+import com.pedropathing.geometry.Pose;
+
 import java.util.HashMap;
 
 public class Constants {
@@ -70,18 +72,8 @@ public class Constants {
         public static String LimelightCameraName = "Limelight3A";
 
 
-        public static HashMap<String, Integer> blueDriveCoords = new HashMap<>();
-        {
-            blueDriveCoords.put("x", -48);
-            blueDriveCoords.put("y",24);
-        }
-
-        public static HashMap<String, Integer> redDriveCoords = new HashMap<>();
-        {
-            redDriveCoords.put("x", -48);
-
-            redDriveCoords.put("y", -24);
-        }
+        public static final Pose BLUE_DRIVE_POSE = new Pose(-48, 24);
+        public static final Pose RED_DRIVE_POSE = new Pose(-48, -24);
     }
 
 
