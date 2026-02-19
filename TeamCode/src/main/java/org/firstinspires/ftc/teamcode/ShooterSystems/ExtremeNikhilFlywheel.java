@@ -118,6 +118,7 @@ public class ExtremeNikhilFlywheel {
             flywheelTargetVel = 0;
 
             left_flywheel.setVelocity(0);
+            right_flywheel.setVelocity(0);
         }
 
         if (flywheelEngaged) {
@@ -126,9 +127,11 @@ public class ExtremeNikhilFlywheel {
             if (currX > 0 && currY > 0) {
                 flywheelTargetVel = FlywheelConstants.close_velocity;
                 left_flywheel.setVelocity(flywheelTargetVel);
+                right_flywheel.setVelocity(flywheelTargetVel);
             } else {
                 flywheelTargetVel = FlywheelConstants.far_velocity;
                 left_flywheel.setVelocity(flywheelTargetVel);
+                right_flywheel.setVelocity(flywheelTargetVel);
 
             }
         }
