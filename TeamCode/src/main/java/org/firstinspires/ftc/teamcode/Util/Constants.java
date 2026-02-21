@@ -74,6 +74,9 @@ public class Constants {
 
         public static final Pose BLUE_DRIVE_POSE = new Pose(-48, 24);
         public static final Pose RED_DRIVE_POSE = new Pose(-48, -24);
+
+        public static final Pose BLUE_START_POSE = new Pose(-50,  20, -Math.PI/ 2);
+        public static final Pose RED_START_POSE = new Pose(-50, 0, Math.PI /2);
     }
 
 

@@ -69,16 +69,14 @@ public class Transfer {
     }
 
     public void threeTransfer() {
-        transfer.setVelocity(TransferConstants.transfer_velocity);
         new WaitUntil(() -> flywheel.isAtTargetVelocity());
-
         transfer.setVelocity(TransferConstants.transfer_velocity);
-        new WaitUntil(() -> flywheel.isAtTargetVelocity());
 
+        new WaitUntil(() -> flywheel.isAtTargetVelocity());
         transfer.setVelocity(TransferConstants.transfer_velocity);
+
         new WaitUntil(() -> flywheel.isAtTargetVelocity());
-
-
+        transfer.setVelocity(TransferConstants.transfer_velocity);
     }
 
     public void singleTransfer() {
