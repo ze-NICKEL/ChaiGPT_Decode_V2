@@ -6,8 +6,6 @@ public class SubZeroTester {
 
 
     public static Specialization specialization = new Specialization()
-
-            .setFirst(5)
-            .setSecond(6);
-
+            .first(5)
+            .second(6);
 }

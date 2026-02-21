@@ -11,7 +11,7 @@ public class Specialization {
         second = 1;
     }
 
-    public Specialization setFirst(double first) {
+    public Specialization first(double first) {
         this.first = first;
 
         return this;
@@ -20,7 +20,7 @@ public class Specialization {
 
     }
 
-    public Specialization setSecond(double second) {
+    public Specialization second(double second) {
         this.second = second;
         return this;
     }
