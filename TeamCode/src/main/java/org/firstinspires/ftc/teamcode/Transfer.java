@@ -31,8 +31,6 @@ public class Transfer {
 
 
     ExtremeNikhilFlywheel flywheel;
-
-    Pose initialPose;
     public Transfer(@NonNull HardwareMap hardwareMap, Gamepad gamepad1, Pose initialPose) {
         this.transfer = hardwareMap.get(DcMotorEx.class, TransferConstants.transfer_name);
 

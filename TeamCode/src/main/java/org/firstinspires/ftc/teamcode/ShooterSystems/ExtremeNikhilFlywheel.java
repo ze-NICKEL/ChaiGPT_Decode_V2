@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -39,7 +40,11 @@ public class ExtremeNikhilFlywheel {
 
         left_flywheel = hardwareMap.get(DcMotorEx.class, MotorNames.left_flywheel);
 
+        left_flywheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         right_flywheel = hardwareMap.get(DcMotorEx.class, MotorNames.right_flywheel);
+        right_flywheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         this.hardwareMap = hardwareMap;
 

@@ -34,7 +34,13 @@ Goal.ALLIANCE goalAlliance;
 Turret turret;
 Goal goal;
 
+
+
     public void initializeDevices() {
+
+        super.telemetry.addLine("hohoho");
+        super.telemetry.update();
+
 
         intake = new Intake(hardwareMap, gamepad1, gamepad2);
 
@@ -58,6 +64,12 @@ Goal goal;
 
 
     public void loopertron() {
+
+
+        super.telemetry.addLine("hihihihi");
+
+        super.telemetry.update();
+
         flywheel.update();
         turret.update();
         transfer.update();

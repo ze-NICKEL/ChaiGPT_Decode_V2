@@ -7,6 +7,11 @@ import dev.nextftc.core.commands.Command;
 
 public class NikhilFunctions {
 
+
+    /**
+     * @param x Value to be clamped;
+     * @return Clamped value of x between -1 and 1;
+     */
     public double clamp(double x) {
 
         if (x > 1) {

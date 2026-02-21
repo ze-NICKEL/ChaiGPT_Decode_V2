@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.ShooterSystems;
 
+import com.pedropathing.geometry.Pose;
+
 import java.util.HashMap;
 
 public class Goal {
@@ -10,19 +12,10 @@ public class Goal {
         RED
     }
 
-    static HashMap<String, Integer> BlueCoords = new HashMap<>();
+    Pose blueCoords = new Pose(50,50);
 
-    {
-        BlueCoords.put("x", 50);
-        BlueCoords.put("y", 50);
-    }
+    Pose redCoords = new Pose(50, -50);
 
-    static HashMap<String, Integer> RedCoords = new HashMap<>();
-
-    {
-        RedCoords.put("x", 50);
-        RedCoords.put("y", -50);
-    }
 
     public ALLIANCE alliance;
 
@@ -32,12 +25,12 @@ public class Goal {
     public Goal(ALLIANCE alliance) {
 
         if (alliance == ALLIANCE.BLUE) {
-                this.x = BlueCoords.get("x");
-                this.y = BlueCoords.get("y");
+                this.x = blueCoords.getX();
+                this.y = blueCoords.getY();
         }
         else if (alliance == ALLIANCE.RED) {
-            this.x = RedCoords.get("x");
-            this.y = RedCoords.get("Y");
+            this.x = redCoords.getX();
+            this.y = redCoords.getY();
         }
     }
 }
