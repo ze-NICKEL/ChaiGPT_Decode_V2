@@ -78,8 +78,8 @@ public class PedroDrive {
 
         pedroDrive = follower.pathBuilder().addPath(
                 new BezierLine(
-                        new Pose(currentPose.getX(),currentPose.getY()),
-                        new Pose(x,y)
+                        new Pose(currentPose.getX(), currentPose.getY()),
+                        BLUE_DRIVE_POSE
                 )
         ).build();
 
