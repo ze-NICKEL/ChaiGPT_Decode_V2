@@ -10,7 +10,6 @@ public class SubZeroTester extends OpMode {
 
 
 
-
     public static Specialization specialization = new Specialization()
             .first(5)
             .second(6);

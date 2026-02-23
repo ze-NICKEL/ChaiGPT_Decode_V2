@@ -15,7 +15,7 @@ public class CoreTester {
 
     Follower follower;
 
-    Pose initialPose = new Pose(10,10,10);
+    Pose initialPose;
 
     Telemetry telemetry;
 
