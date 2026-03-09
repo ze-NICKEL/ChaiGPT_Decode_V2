@@ -108,15 +108,18 @@ public class Turret {
 
     public double turretTurnTicks = 0;
 
-    public void setPosition(double endPos) {
+    public static double TURRET_TICKS_PER_DEGREE = 91.0222222222;
+    public void setPosition(double degrees) {
 
-        this.turretTurnTicks = endPos;
+        this.turretTurnTicks = degrees * TURRET_TICKS_PER_DEGREE;
 
     }
 
     double prevTime = 0, currTime = 0;
 
     ElapsedTime timer = new ElapsedTime();
+
+    double integral;
 
     public void updatePID() {
         prevError = currError;
@@ -130,14 +133,17 @@ public class Turret {
 
 
         p = kp * currError;
-        i = ki * errorSum;
+
+        integral += currError * dT;
+        i = ki * integral;
         d = kd * (prevError - currError) / dT;
 
         left_turret.setPower(customFunctions.clamp(p + i + d));
         right_turret.setPower(customFunctions.clamp(p + i + d));
 
-
     }
+
+    double robotAngle = 45;
 
     public void update() {
         follower.update();
@@ -150,37 +156,18 @@ public class Turret {
         currentY = currentPose.getY();
 
         follower.update();
+        robotHeading = Math.toDegrees(currentPose.getHeading());
 
         deltaX = targetX - currentX;
         deltaY = targetY - currentY;
 
-        setPosition(73.5179487179 * (90 - Math.toDegrees(currentPose.getHeading())));
+        fieldAngle = FastMath.atan2(deltaY, deltaX);
+
+        robotAngle = (90-fieldAngle) + robotHeading;
+
+        setPosition(robotAngle + robotHeading);
 
         updatePID();
     }
 
-    /*public void update() {
-
-        follower.update();
-
-        currTurretPosTicks = motor.getCurrentPosition();
-        currentPose = follower.getPose();
-
-        currentX = currentPose.getX();
-        currentY = currentPose.getY();
-
-        follower.update();
-
-        deltaX = targetX - currentX;
-        deltaY = targetY - currentY;
-
-    fieldAngle = FastMath.toDegrees(FastMath.atan2(deltaY, deltaX));
-        robotHeading = FastMath.toDegrees(currentPose.getHeading());
-        pointC = 180 - (robotHeading + fieldAngle);
-
-        setPosition(0.0020446994 * pointC + fieldAngle);
-        updatePID();
-        follower.update();
-
-    }*/
 }

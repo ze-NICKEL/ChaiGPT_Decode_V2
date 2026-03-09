@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.ShooterSystems.ExtremeNikhilFlywheel;
 @TeleOp(name = "FLYWHEEL PID TUNER", group = "tuning")
 public class FlywheelPID extends OpMode {
     ExtremeNikhilFlywheel flywheel;
-    static double kp=0,ki=0,kd=0;
+    public static double kp=0,ki=0,kd=0;
 
 
     Pose initialPose = new Pose(0,0,Math.toRadians(270));
