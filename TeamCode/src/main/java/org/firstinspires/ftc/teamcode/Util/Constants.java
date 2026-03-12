@@ -25,6 +25,17 @@ public class Constants {
 
     }
 
+    public static class TurretConstants {
+        public static class FarConstants {
+            public double[] Right_PID = {
+              0.00037,
+              0.000000009,
+              0,
+              //NO F
+            };
+        }
+    }
+
 
     public static class MotorNames {
 

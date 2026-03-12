@@ -21,9 +21,12 @@ public class TurretPID extends OpMode {
 
     Turret turret;
 
-    Pose initialPose = new Pose(0,0,0);
 
-    Pose targetPose = new Pose(64.1951219512195, 64.1951219512195);
+    public static double x = 0;
+    public static double y = 0;
+    Pose initialPose = new Pose(0,0);
+
+    Pose targetPose = new Pose(x, y);
 
     Telemetry telemetry;
     Goal goal = new Goal(Goal.ALLIANCE.BLUE);
@@ -43,6 +46,9 @@ public class TurretPID extends OpMode {
     @Override
     public void loop() {
 
+        turret.targetX = x;
+        turret.targetY = y;
+
         turret.setPIDFCoefficients(kp, ki, kd);
         turret.update();
 
@@ -53,7 +59,15 @@ public class TurretPID extends OpMode {
         telemetry.addData("TargetX: ", turret.targetX);
         telemetry.addData("targetY: ", turret.targetY);
 
+        telemetry.addLine();
+
+        telemetry.addData("robot heading: ", turret.robotHeading);
+
+
+
         telemetry.addData("turret turn: ", turret.turretTurnTicks);
+
+
 
         telemetry.update();
 

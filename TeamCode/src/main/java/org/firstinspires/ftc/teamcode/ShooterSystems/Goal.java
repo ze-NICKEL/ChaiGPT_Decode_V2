@@ -12,7 +12,7 @@ public class Goal {
         RED
     }
 
-    Pose blueCoords = new Pose(64.1951219512195,60.58536585365853);
+    Pose blueCoords = new Pose(73,64);
 
     Pose redCoords = new Pose(64.1951219512195, -60.58536585365853);
 

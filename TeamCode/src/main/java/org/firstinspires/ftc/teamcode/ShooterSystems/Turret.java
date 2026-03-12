@@ -40,7 +40,7 @@ public class Turret {
     double deltaX = 0;
     double deltaY = 0;
 
-    double robotHeading = 0;
+    public double robotHeading = 0;
 
     Follower follower;
 
@@ -143,6 +143,9 @@ public class Turret {
 
     }
 
+    public double toDegrees(double radians) {
+        return radians * (180/Math.PI);
+    }
     double robotAngle = 45;
 
     public void update() {
@@ -156,17 +159,20 @@ public class Turret {
         currentY = currentPose.getY();
 
         follower.update();
-        robotHeading = Math.toDegrees(currentPose.getHeading());
+        robotHeading = toDegrees(currentPose.getHeading());
 
-        deltaX = targetX - currentX;
-        deltaY = targetY - currentY;
+        robotHeading*= -1;
 
-        fieldAngle = FastMath.atan2(deltaY, deltaX);
+        robotHeading -= 90;
 
-        robotAngle = (90-fieldAngle) + robotHeading;
+        deltaY = targetX - currentX;
+        deltaX = targetY - currentY;
+
+        fieldAngle = toDegrees(FastMath.atan2(deltaY, deltaX));
+
+        robotAngle = 90 - fieldAngle;
 
         setPosition(robotAngle + robotHeading);
-
         updatePID();
     }
 
